@@ -1,0 +1,49 @@
+<div>
+    <h3>Forecast management</h3>
+
+    <form (ngSubmit)="saveRecord()" #userForm="ngForm" ngNativeValidate>
+        <div class="field">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" [(ngModel)]="forecast.date" required #date="ngModel"/>
+        </div>
+
+        <div class="field">
+            <label for="temperature">Temperature</label>
+            <input type="number" id="temperature" name="temperature" [(ngModel)]="forecast.temperature" required #temperature="ngModel"/><br/>
+        </div>
+
+        <div class="field">
+            <label for="wind">Wind direction</label>
+            <select name="wind" id="wind" [(ngModel)]="forecast.windDirection" #windDirection="ngModel">
+                <option value="WEST" selected="selected">WEST</option>
+                <option value="NORTH">NORTH</option>
+                <option value="EAST">EAST</option>
+                <option value="SOUTH">SOUTH</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <input type="submit" value="Save"/>
+            <button type="button" (click)="logout()">Logout</button>
+        </div>
+    </form>
+
+    <table class="table table-striped forecast">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Temp</th>
+            <th>Wind</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let forecast of forecastList" [class]="(today | date: 'yyyy-MM-dd') == forecast.date ? 'todayStyle' : null">
+            <td>{{forecast.date}}</td>
+            <td>{{forecast.temperature}}&deg;C</td>
+            <td>{{forecast.windDirection}}</td>
+            <td><button type="button" (click)="deleteRecord(forecast)">Delete</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

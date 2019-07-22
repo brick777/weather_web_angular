@@ -1,0 +1,26 @@
+<h4>Filter by wind direction:</h4>
+<div><input type="checkbox" name="west" value="WEST" checked (change)="onChange($event)"/>West</div>
+<div><input type="checkbox" name="north" value="NORTH" checked (change)="onChange($event)"/>North</div>
+<div><input type="checkbox" name="east" value="EAST" checked (change)="onChange($event)"/>East</div>
+<div><input type="checkbox" name="south" value="SOUTH" checked (change)="onChange($event)"/>South</div>
+
+<div>
+    <h3>Weather forecast</h3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Temp</th>
+            <th>Wind</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let forecast of forecastList" [class]="(today | date: 'yyyy-MM-dd') == forecast.date ? 'todayStyle' : null">
+            <td>{{forecast.date}}</td>
+            <td>{{forecast.temperature}}&deg;C</td>
+            <td>{{forecast.windDirection}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
